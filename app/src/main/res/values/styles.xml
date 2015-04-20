@@ -1,10 +1,21 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <!-- Base application theme.-->
+    <!--style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar"-->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/sunshine_blue</item>
         <item name="colorPrimaryDark">@color/sunshine_dark_blue</item>
         <item name="colorControlHighlight">@color/sunshine_dark_blue</item>
-        <item name="colorAccent">@color/sunshine_yellow</item>
+        <item name="colorAccent">@color/sunshine_green</item>
+    </style>
+
+    <style name="ToolBarTheme" parent="AppTheme">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="textAppearanceLargePopupMenu">@style/OverflowMenuStyle</item>
+    </style>
+
+    <style name="OverflowMenuStyle" parent="TextAppearance.AppCompat.Light.Widget.PopupMenu.Large">
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="ForecastListStyle">
