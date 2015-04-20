@@ -1,13 +1,13 @@
 <resources>
-
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/sunshine_blue</item>
+        <item name="colorPrimaryDark">@color/sunshine_dark_blue</item>
+        <item name="colorControlHighlight">@color/sunshine_dark_blue</item>
+        <item name="colorAccent">@color/sunshine_yellow</item>
     </style>
 
     <style name="ForecastListStyle">
         <!-- Here it's a stub. In screens of sufficient width, this includes modifications for two-pane layout -->
-
     </style>
-
 </resources>

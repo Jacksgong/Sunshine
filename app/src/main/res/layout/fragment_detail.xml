@@ -6,50 +6,71 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        android:padding="@dimen/fragment_margin">
         <!-- Header: Day, Date -->
         <TextView
             android:id="@+id/detail_day_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tomorrow" />
+            android:text="Tomorrow"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="@color/black"
+            android:textSize="@dimen/detail_day_text_size" />
 
         <TextView
             android:id="@+id/detail_date_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="June 24" />
-
+            android:text="June 24"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="@color/black"
+            android:textSize="@dimen/detail_date_text_size" />
         <!-- Main content: high, low, art, weather state -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/fragment_margin"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
-
-            <LinearLayout
+            <!-- LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
+                    android:fontFamily="sans-serif-light"
                     android:id="@+id/detail_high_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/detail_high_text_size"
+                    android:layout_gravity="center_horizontal"
                     android:text="21°" />
 
                 <TextView
+                    android:fontFamily="sans-serif-light"
                     android:id="@+id/detail_low_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="11°" />
+                    android:textSize="@dimen/detail_low_text_size"
+                    android:text="11°"
+                    android:layout_gravity="center_horizontal" />
             </LinearLayout>
-
-            <LinearLayout
+            <!-- LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -62,27 +83,33 @@
                     android:id="@+id/detail_forecast_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Clear" />
+                    android:text="Clear"
+                    android:textAppearance="?android:textAppearanceLarge" />
             </LinearLayout>
         </LinearLayout>
-
         <!-- Humidity, wind, pressure -->
         <TextView
             android:id="@+id/detail_humidity_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="48%" />
+            android:text="48%"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:layout_marginTop="@dimen/textview_margin" />
 
         <TextView
             android:id="@+id/detail_wind_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="6 km/h NW" />
+            android:text="6 km/h NW"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:layout_marginTop="@dimen/textview_margin" />
 
         <TextView
             android:id="@+id/detail_pressure_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1014" />
+            android:text="1014"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:layout_marginTop="@dimen/textview_margin" />
     </LinearLayout>
 </ScrollView>
