@@ -84,6 +84,7 @@
 
             <ImageView
                 android:id="@+id/detail_icon"
+                android:transitionName="@string/transition_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -91,6 +92,7 @@
                 android:id="@+id/detail_forecast_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:transitionName="@string/transition_forecast_text"
                 android:textAppearance="?android:textAppearanceLarge" />
         </LinearLayout>
     </LinearLayout>

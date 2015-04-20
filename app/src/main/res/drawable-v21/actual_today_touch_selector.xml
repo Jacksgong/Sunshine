@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Removing the Pressed state so that the ripple color can show more prominently -->
     <!-- Used when the view is "activated". -->
-    <item android:state_activated="true" android:drawable="@color/sunshine_light_blue" />
+    <item android:drawable="@color/sunshine_light_blue" android:state_activated="true" />
     <!-- Default, "just hangin' out" state. -->
     <item android:drawable="@color/sunshine_blue" />
 </selector>

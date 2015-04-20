@@ -163,7 +163,8 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
                     // on phone, launch DetailActivity;
                     // on tablet, replace DetailFragment
                     ((Callback) getActivity())
-                            .onItemSelected(cursor.getString(COL_WEATHER_DATE));
+                            .onItemSelected(cursor.getString(COL_WEATHER_DATE),
+                                    position - mListView.getFirstVisiblePosition() - mListView.getHeaderViewsCount());
 
                     // When item is clicked, store clicked cursor position
                     mCursorPosition = position;
@@ -274,6 +275,6 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         /**
          * DetailFragmentCallback for when an items has been selected
          */
-        public void onItemSelected(String date);
+        public void onItemSelected(String date, int position);
     }
 }

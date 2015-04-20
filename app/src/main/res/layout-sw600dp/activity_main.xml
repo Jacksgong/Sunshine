@@ -1,19 +1,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.android.sunshine.app.MainActivity">
     <!--
     This layout is a two-pane layout for the Sunshine master/detail flow.
     -->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_height="@dimen/action_bar_height"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_height"
         android:background="?attr/colorPrimary"
         android:elevation="@dimen/layer_1"
         app:theme="@style/ToolBarTheme" />
