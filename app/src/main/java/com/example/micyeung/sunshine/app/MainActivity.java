@@ -10,8 +10,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
 import com.example.micyeung.sunshine.app.sync.SunshineSyncAdapter;
+
 public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback {
     private final String LOG_TAG = MainActivity.class.getSimpleName();
     private boolean mTwoPane;
@@ -49,7 +49,7 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("MainActivity","onCreate");
+        Log.i("MainActivity", "onCreate");
         setContentView(R.layout.activity_main);
         if (findViewById(R.id.weather_detail_container) != null) {
             // The detail container view will be present only in large screen layouts (sw600dp)
@@ -62,7 +62,7 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
             // otherwise, we have to add in the detail fragment dynamically
             if (savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.weather_detail_container,new DetailFragment())
+                        .replace(R.id.weather_detail_container, new DetailFragment())
                         .commit();
             }
         } else {
@@ -72,11 +72,10 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         // If it's two-pane mode, then we don't use today-layout for the master (left) layout, i.e. first
         // row of the master looks like the other rows
         // Else, in a one-pane mode, the first row looks different, more emphasized, bigger image, etc.
-        ForecastFragment forecastFragment = (ForecastFragment)getSupportFragmentManager()
+        ForecastFragment forecastFragment = (ForecastFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_forecast);
         forecastFragment.setUseTodayLayout(!mTwoPane);
-        
-        
+
 
         // Initializes Sync Adapter. If we're using other ways of pulling data
         // e.g. with FetchWeatherTask or SunshineService, comment this line out.
@@ -98,7 +97,7 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Intent launchSettingsIntent = new Intent(this,SettingsActivity.class);
+            Intent launchSettingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(launchSettingsIntent);
         } else if (id == R.id.action_map) {
             openPreferredLocationInMap();
@@ -108,17 +107,17 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
 
     private void openPreferredLocationInMap() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String location= prefs.getString(getString(R.string.pref_location_key),getString(R.string.pref_location_default));
+        String location = prefs.getString(getString(R.string.pref_location_key), getString(R.string.pref_location_default));
 
         Uri uri = Uri.parse("geo:0,0?").buildUpon()
-                .appendQueryParameter("q",location)
+                .appendQueryParameter("q", location)
                 .build();
-        Intent launchMapIntent = new Intent (Intent.ACTION_VIEW);
+        Intent launchMapIntent = new Intent(Intent.ACTION_VIEW);
         launchMapIntent.setData(uri);
         if (launchMapIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(launchMapIntent);
         } else {
-            Log.d(LOG_TAG,"Could call " + location);
+            Log.d(LOG_TAG, "Could call " + location);
         }
     }
 
@@ -129,12 +128,12 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
             // Ans: we create an empty DetailFragment, then set its arguments.
             // In two-pane mode, show the detail view in this activity by adding or replacing the detail fragment using a fragment transaction.
             Bundle args = new Bundle();
-            args.putString(DetailActivity.DATE_KEY,date);
+            args.putString(DetailActivity.DATE_KEY, date);
 
             DetailFragment detailFragment = new DetailFragment();
             detailFragment.setArguments(args);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.weather_detail_container,detailFragment)
+                    .replace(R.id.weather_detail_container, detailFragment)
                     .commit();
 
         } else {

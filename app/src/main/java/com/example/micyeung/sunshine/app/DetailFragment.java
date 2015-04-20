@@ -23,25 +23,17 @@ import android.widget.TextView;
 
 import com.example.micyeung.sunshine.app.data.WeatherContract;
 import com.example.micyeung.sunshine.app.data.WeatherContract.WeatherEntry;
+
 /**
  * Created by micyeung on 12/18/14.
  */
 
 public class DetailFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+    public static final String DATE_KEY = "forecast_date";
     private static final String LOG_TAG = DetailFragment.class.getSimpleName();
     private static final String HASHTAG = "#Sunshine";
     private static final String LOCATION_KEY = "location";
-
-
-    public static final String DATE_KEY = "forecast_date";
-
-    private ShareActionProvider mShareActionProvider;
-    private String mLocation;
-    private String mForecast;
-    private String mDateStr;
-
     private static final int DETAIL_LOADER = 0;
-
     private static final String[] FORECAST_COLUMNS = {
             WeatherContract.WeatherEntry.TABLE_NAME + "." + WeatherContract.WeatherEntry._ID,
             WeatherContract.WeatherEntry.COLUMN_DATETEXT,
@@ -57,6 +49,10 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             // weather data, even though they're stored in two different tables.
             WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING
     };
+    private ShareActionProvider mShareActionProvider;
+    private String mLocation;
+    private String mForecast;
+    private String mDateStr;
     private ImageView mIconView;
     private TextView mFriendlyDateView;
     private TextView mDateView;
@@ -70,7 +66,6 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     public DetailFragment() {
         setHasOptionsMenu(true);
     }
-
 
 
     @Override
@@ -115,13 +110,13 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.detailfragment,menu);
+        inflater.inflate(R.menu.detailfragment, menu);
         Log.v(LOG_TAG, "in onCreateOptionsMenu");
         MenuItem shareItem = menu.findItem(R.id.action_share);
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
 
         // If onLoadFinished happens before this, we can go ahead and set the share intent now.
-        if (mForecast != null ) {
+        if (mForecast != null) {
             mShareActionProvider.setShareIntent(createShareForecastIntent());
         }
     }
@@ -130,7 +125,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT,mForecast + HASHTAG);
+        intent.putExtra(Intent.EXTRA_TEXT, mForecast + HASHTAG);
         return intent;
     }
 
@@ -215,7 +210,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             mPressureView.setText(getActivity().getString(R.string.format_pressure, pressure));
 
             // We still need this for the share intent
-             mForecast = String.format("%s - %s - %s/%s", dateText, description, high, low);
+            mForecast = String.format("%s - %s - %s/%s", dateText, description, high, low);
 
             Log.v(LOG_TAG, "Forecast String: " + mForecast);
 

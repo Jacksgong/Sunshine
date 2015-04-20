@@ -8,12 +8,12 @@ import junit.framework.Test;
  * Created by micyeung on 11/21/14.
  */
 public class FullTestSuite {
+    public FullTestSuite() {
+        super();
+    }
+
     public static Test suite() {
         return new TestSuiteBuilder(FullTestSuite.class)
                 .includeAllPackagesUnderHere().build();
-    }
-
-    public FullTestSuite() {
-        super();
     }
 }

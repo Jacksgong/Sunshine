@@ -4,8 +4,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-import com.example.micyeung.sunshine.app.sync.SunshineAuthenticator;
-
 /**
  * The service which allows the sync adapter framework to access the authenticator.
  */

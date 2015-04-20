@@ -20,12 +20,6 @@ public class WeatherProvider extends ContentProvider {
     private static final int WEATHER_WITH_LOCATION_AND_DATE = 102;
     private static final int LOCATION = 300;
     private static final int LOCATION_ID = 301;
-    private WeatherDbHelper mOpenHelper;
-
-    // The URI Matcher used by this content provider
-    private static UriMatcher sUriMatcher = buildUriMatcher();
-    private final String LOG_TAG = WeatherProvider.class.getSimpleName();
-
     private static final SQLiteQueryBuilder sWeatherByLocationSettingQueryBuilder;
 
     static {
@@ -40,16 +34,30 @@ public class WeatherProvider extends ContentProvider {
     }
 
     private static final String sLocationSettingSelection =
-            WeatherContract.LocationEntry.TABLE_NAME+
+            WeatherContract.LocationEntry.TABLE_NAME +
                     "." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? ";
     private static final String sLocationSettingWithStartDateSelection =
-            WeatherContract.LocationEntry.TABLE_NAME+
+            WeatherContract.LocationEntry.TABLE_NAME +
                     "." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? AND " +
                     WeatherContract.WeatherEntry.COLUMN_DATETEXT + " >= ? ";
     private static final String sLocationSettingAndDaySelection =
             WeatherContract.LocationEntry.TABLE_NAME +
                     "." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? AND " +
                     WeatherContract.WeatherEntry.COLUMN_DATETEXT + " = ? ";
+    // The URI Matcher used by this content provider
+    private static UriMatcher sUriMatcher = buildUriMatcher();
+    private final String LOG_TAG = WeatherProvider.class.getSimpleName();
+    private WeatherDbHelper mOpenHelper;
+
+    private static UriMatcher buildUriMatcher() {
+        UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        uriMatcher.addURI(WeatherContract.CONTENT_AUTHORITY, "weather", WEATHER);
+        uriMatcher.addURI(WeatherContract.CONTENT_AUTHORITY, "weather/*", WEATHER_WITH_LOCATION);
+        uriMatcher.addURI(WeatherContract.CONTENT_AUTHORITY, "weather/*/*", WEATHER_WITH_LOCATION_AND_DATE);
+        uriMatcher.addURI(WeatherContract.CONTENT_AUTHORITY, "location", LOCATION);
+        uriMatcher.addURI(WeatherContract.CONTENT_AUTHORITY, "location/#", LOCATION_ID);
+        return uriMatcher;
+    }
 
     private Cursor getWeatherByLocationSetting(Uri uri, String[] projection, String sortOrder) {
         String locationSetting = WeatherContract.WeatherEntry.getLocationSettingFromUri(uri);
@@ -104,19 +112,19 @@ public class WeatherProvider extends ContentProvider {
         Cursor retCursor;
         switch (sUriMatcher.match(uri)) {
             // "weather/*/*"
-            case WEATHER_WITH_LOCATION_AND_DATE:{
-                retCursor = getWeatherByLocationSettingAndDate(uri,projection,sortOrder);
-                Log.v(LOG_TAG,"Weather with location and date");
+            case WEATHER_WITH_LOCATION_AND_DATE: {
+                retCursor = getWeatherByLocationSettingAndDate(uri, projection, sortOrder);
+                Log.v(LOG_TAG, "Weather with location and date");
                 break;
             }
             // "weather/*"
-            case WEATHER_WITH_LOCATION:{
-                retCursor = getWeatherByLocationSetting(uri,projection,sortOrder);
-                Log.v(LOG_TAG,"Weather with location ");
+            case WEATHER_WITH_LOCATION: {
+                retCursor = getWeatherByLocationSetting(uri, projection, sortOrder);
+                Log.v(LOG_TAG, "Weather with location ");
                 break;
             }
             // "weather"
-            case WEATHER:{
+            case WEATHER: {
                 retCursor = mOpenHelper.getReadableDatabase().query(
                         WeatherContract.WeatherEntry.TABLE_NAME,
                         projection,
@@ -126,7 +134,7 @@ public class WeatherProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
-                Log.v(LOG_TAG,"Weather ");
+                Log.v(LOG_TAG, "Weather ");
                 break;
             }
             // "location/*"
@@ -140,7 +148,7 @@ public class WeatherProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
-                Log.v(LOG_TAG,"location ID");
+                Log.v(LOG_TAG, "location ID");
                 break;
             }
             // "location"
@@ -154,7 +162,7 @@ public class WeatherProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
-                Log.v(LOG_TAG,"location");
+                Log.v(LOG_TAG, "location");
                 break;
             }
             default:
@@ -163,7 +171,7 @@ public class WeatherProvider extends ContentProvider {
         }
         // Sets notification Uri for cursor causes cursor to watch for changes in the Uri and
         // its descendents (i.e. any other uri that begins with this uri's path).
-        retCursor.setNotificationUri(getContext().getContentResolver(),uri);
+        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
         return retCursor;
     }
 
@@ -203,7 +211,7 @@ public class WeatherProvider extends ContentProvider {
                 break;
             }
             case LOCATION: {
-                long _id = db.insert(WeatherContract.LocationEntry.TABLE_NAME,null,values);
+                long _id = db.insert(WeatherContract.LocationEntry.TABLE_NAME, null, values);
                 if (_id > 0) {
                     returnUri = WeatherContract.LocationEntry.buildLocationUri(_id);
                 } else {
@@ -253,16 +261,6 @@ public class WeatherProvider extends ContentProvider {
             default:
                 return super.bulkInsert(uri, values);
         }
-    }
-
-    private static UriMatcher buildUriMatcher() {
-        UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        uriMatcher.addURI(WeatherContract.CONTENT_AUTHORITY,"weather",WEATHER);
-        uriMatcher.addURI(WeatherContract.CONTENT_AUTHORITY,"weather/*",WEATHER_WITH_LOCATION);
-        uriMatcher.addURI(WeatherContract.CONTENT_AUTHORITY,"weather/*/*",WEATHER_WITH_LOCATION_AND_DATE);
-        uriMatcher.addURI(WeatherContract.CONTENT_AUTHORITY,"location",LOCATION);
-        uriMatcher.addURI(WeatherContract.CONTENT_AUTHORITY,"location/#",LOCATION_ID);
-        return uriMatcher;
     }
 
 }

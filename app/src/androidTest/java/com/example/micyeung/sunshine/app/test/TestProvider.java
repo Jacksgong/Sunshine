@@ -3,11 +3,8 @@ package com.example.micyeung.sunshine.app.test;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.location.Location;
 import android.net.Uri;
 import android.test.AndroidTestCase;
-import android.util.Log;
 
 import com.example.micyeung.sunshine.app.data.WeatherContract.LocationEntry;
 import com.example.micyeung.sunshine.app.data.WeatherContract.WeatherEntry;
@@ -40,7 +37,7 @@ public class TestProvider extends AndroidTestCase {
         values.put(LocationEntry.COLUMN_COORD_LAT, testLatitude);
         values.put(LocationEntry.COLUMN_COORD_LONG, testLongitude);
 
-        Uri locationUri = mContext.getContentResolver().insert(LocationEntry.CONTENT_URI,values);
+        Uri locationUri = mContext.getContentResolver().insert(LocationEntry.CONTENT_URI, values);
         assertTrue(locationUri != null);
 
         long locationRowId = ContentUris.parseId(locationUri);
@@ -110,7 +107,7 @@ public class TestProvider extends AndroidTestCase {
         weatherValues.put(WeatherEntry.COLUMN_WEATHER_ID, 321);
 
 
-        Uri weatherUri = mContext.getContentResolver().insert(WeatherEntry.CONTENT_URI,weatherValues);
+        Uri weatherUri = mContext.getContentResolver().insert(WeatherEntry.CONTENT_URI, weatherValues);
         assertTrue(weatherUri != null);
 
         // A cursor is your primary interface to the query results.

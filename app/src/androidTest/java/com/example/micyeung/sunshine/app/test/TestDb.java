@@ -44,7 +44,7 @@ public class TestDb extends AndroidTestCase {
         values.put(LocationEntry.COLUMN_COORD_LAT, testLatitude);
         values.put(LocationEntry.COLUMN_COORD_LONG, testLongitude);
 
-        long locationRowId = db.insert(LocationEntry.TABLE_NAME,null,values);
+        long locationRowId = db.insert(LocationEntry.TABLE_NAME, null, values);
 
         // Verify we got a row back
         assertTrue(locationRowId != -1);

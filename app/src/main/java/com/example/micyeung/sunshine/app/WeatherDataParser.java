@@ -4,24 +4,20 @@ import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.os.Build;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.example.micyeung.sunshine.app.data.WeatherContract;
+import com.example.micyeung.sunshine.app.data.WeatherContract.WeatherEntry;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
-import com.example.micyeung.sunshine.app.data.WeatherContract.WeatherEntry;
 
 public class WeatherDataParser {
     public static final String LOG_TAG = WeatherDataParser.class.getSimpleName();
@@ -44,7 +40,7 @@ public class WeatherDataParser {
     /**
      * Take the String representing the complete forecast in JSON Format and
      * pull out the data we need to construct the Strings needed for the wireframes.
-     *
+     * <p/>
      * Fortunately parsing is easy:  constructor takes the JSON string and converts it
      * into an Object hierarchy for us.
      */
@@ -97,7 +93,7 @@ public class WeatherDataParser {
         Vector<ContentValues> cVVector = new Vector<ContentValues>(weatherArray.length());
 
 
-        for(int i = 0; i < weatherArray.length(); i++) {
+        for (int i = 0; i < weatherArray.length(); i++) {
             long dateTime;
             double pressure;
             int humidity;
@@ -121,7 +117,7 @@ public class WeatherDataParser {
             humidity = dayForecast.getInt(OWM_HUMIDITY);
             windSpeed = dayForecast.getDouble(OWM_WINDSPEED);
             windDirection = dayForecast.getDouble(OWM_WIND_DIRECTION);
-;
+            ;
             // description is in a child array called "weather", which is 1 element long.
             // That element also contains a weather code.
             JSONObject weatherObject = dayForecast.getJSONArray(OWM_WEATHER).getJSONObject(0);
@@ -156,7 +152,7 @@ public class WeatherDataParser {
             ContentValues[] cvArray = new ContentValues[cVVector.size()];
             cVVector.toArray(cvArray);
 
-            ctx.getContentResolver().bulkInsert(WeatherEntry.CONTENT_URI,cvArray);
+            ctx.getContentResolver().bulkInsert(WeatherEntry.CONTENT_URI, cvArray);
 
         }
     }
@@ -165,9 +161,9 @@ public class WeatherDataParser {
      * Helper method to handle insertion of a new location in the weather database.
      *
      * @param locationSetting The location string used to request updates from the server.
-     * @param cityName A human-readable city name, e.g "Mountain View"
-     * @param lat the latitude of the city
-     * @param lon the longitude of the city
+     * @param cityName        A human-readable city name, e.g "Mountain View"
+     * @param lat             the latitude of the city
+     * @param lon             the longitude of the city
      * @return the row ID of the added location.
      */
     private long addLocation(String locationSetting, String cityName, double lat, double lon, Context ctx) {

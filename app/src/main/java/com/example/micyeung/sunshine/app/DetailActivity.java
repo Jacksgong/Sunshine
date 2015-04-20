@@ -9,6 +9,7 @@ import android.view.MenuItem;
 public class DetailActivity extends ActionBarActivity {
 
     public static final String DATE_KEY = "forecast_date";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,7 +18,7 @@ public class DetailActivity extends ActionBarActivity {
             // Create the detail fragment, set its date string, and add it to the activity using a fragment transaction
             String date = getIntent().getStringExtra(DATE_KEY);
             Bundle arguments = new Bundle();
-            arguments.putString(DATE_KEY,date);
+            arguments.putString(DATE_KEY, date);
 
             DetailFragment detailFragment = new DetailFragment();
             detailFragment.setArguments(arguments);
@@ -43,7 +44,7 @@ public class DetailActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Intent launchSettingsIntent = new Intent(this,SettingsActivity.class);
+            Intent launchSettingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(launchSettingsIntent);
         } else if (id == android.R.id.home) {
             onBackPressed();
