@@ -13,8 +13,8 @@
             android:id="@+id/detail_day_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tomorrow"
             android:fontFamily="sans-serif-condensed"
+            android:text="Tomorrow"
             android:textColor="@color/black"
             android:textSize="@dimen/detail_day_text_size" />
 
@@ -22,8 +22,8 @@
             android:id="@+id/detail_date_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="June 24"
             android:fontFamily="sans-serif-condensed"
+            android:text="June 24"
             android:textColor="@color/black"
             android:textSize="@dimen/detail_date_text_size" />
         <!-- Main content: high, low, art, weather state -->
@@ -44,22 +44,22 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:fontFamily="sans-serif-light"
                     android:id="@+id/detail_high_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/detail_high_text_size"
                     android:layout_gravity="center_horizontal"
-                    android:text="21°" />
+                    android:fontFamily="sans-serif-light"
+                    android:text="21°"
+                    android:textSize="@dimen/detail_high_text_size" />
 
                 <TextView
-                    android:fontFamily="sans-serif-light"
                     android:id="@+id/detail_low_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/detail_low_text_size"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="sans-serif-light"
                     android:text="11°"
-                    android:layout_gravity="center_horizontal" />
+                    android:textSize="@dimen/detail_low_text_size" />
             </LinearLayout>
             <!-- LinearLayout
                 android:layout_width="0dp"
@@ -69,8 +69,8 @@
                 android:orientation="vertical" -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -92,24 +92,24 @@
             android:id="@+id/detail_humidity_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/textview_margin"
             android:text="48%"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:layout_marginTop="@dimen/textview_margin" />
+            android:textAppearance="?android:textAppearanceLarge" />
 
         <TextView
             android:id="@+id/detail_wind_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/textview_margin"
             android:text="6 km/h NW"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:layout_marginTop="@dimen/textview_margin" />
+            android:textAppearance="?android:textAppearanceLarge" />
 
         <TextView
             android:id="@+id/detail_pressure_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/textview_margin"
             android:text="1014"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:layout_marginTop="@dimen/textview_margin" />
+            android:textAppearance="?android:textAppearanceLarge" />
     </LinearLayout>
 </ScrollView>

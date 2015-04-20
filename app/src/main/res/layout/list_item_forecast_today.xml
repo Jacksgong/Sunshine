@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/today_touch_selector"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:orientation="horizontal"
-    android:background="@drawable/today_touch_selector">
+    android:orientation="horizontal">
     <!--android:background="@drawable/touch_selector"-->
     <!--LinearLayout
         android:layout_height="wrap_content"
@@ -14,12 +14,12 @@
         android:orientation="vertical"
         android:gravity="center_horizontal"-->
     <LinearLayout
-        android:layout_height="wrap_content"
         android:layout_width="0dp"
-        android:layout_weight="7"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/fragment_margin"
         android:layout_marginLeft="@dimen/listitem_today_left_margin"
         android:layout_marginTop="@dimen/fragment_margin"
-        android:layout_marginBottom="@dimen/fragment_margin"
+        android:layout_weight="7"
         android:orientation="vertical">
         <!--TextView
             android:id="@+id/list_item_date_textview"
@@ -29,10 +29,10 @@
             android:id="@+id/list_item_date_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:textAppearanceLarge"
             android:fontFamily="sans-serif-condensed"
-            android:textColor="@color/white"
-            android:text="Date" />
+            android:text="Date"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/white" />
         <!--TextView
             android:id="@+id/list_item_high_textview"
             android:layout_width="wrap_content"
@@ -41,10 +41,10 @@
             android:id="@+id/list_item_high_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/listitem_today_high_text_size"
             android:fontFamily="sans-serif-light"
+            android:text="HighTemp"
             android:textColor="@color/white"
-            android:text="HighTemp" />
+            android:textSize="@dimen/listitem_today_high_text_size" />
         <!--TextView
             android:id="@+id/list_item_low_textview"
             android:layout_width="wrap_content"
@@ -53,9 +53,9 @@
             android:id="@+id/list_item_low_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/listitem_today_low_text_size"
+            android:layout_marginLeft="@dimen/textview_large_margin"
             android:textColor="@color/white"
-            android:layout_marginLeft="@dimen/textview_large_margin" />
+            android:textSize="@dimen/listitem_today_low_text_size" />
     </LinearLayout>
     <!--LinearLayout
         android:layout_height="wrap_content"
@@ -64,11 +64,11 @@
         android:orientation="vertical"
         android:gravity="center_horizontal"-->
     <LinearLayout
-        android:layout_height="wrap_content"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="5"
-        android:orientation="vertical"
-        android:gravity="center_horizontal|bottom">
+        android:gravity="center_horizontal|bottom"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/list_item_icon"
@@ -79,8 +79,8 @@
             android:id="@+id/list_item_forecast_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:fontFamily="sans-serif-condensed"
             android:textAppearance="?android:textAppearanceLarge"
-            android:fontFamily="sans-serif-condensed" />
+            android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>
