@@ -22,7 +22,7 @@ public class DetailActivity extends ActionBarActivity {
 
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-        
+
         if (savedInstanceState == null) {
             // Create the detail fragment, set its date string, and add it to the activity using a fragment transaction
             String date = getIntent().getStringExtra(DATE_KEY);
