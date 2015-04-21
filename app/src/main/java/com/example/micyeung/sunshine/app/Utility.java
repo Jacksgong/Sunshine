@@ -1,8 +1,16 @@
 package com.example.micyeung.sunshine.app;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
+import android.util.TypedValue;
 
 import com.example.micyeung.sunshine.app.data.WeatherContract;
 
@@ -19,6 +27,50 @@ public class Utility {
     // Format used for storing dates in the database.  ALso used for converting those strings
     // back into date objects for comparison/processing.
     public static final String DATE_FORMAT = "yyyyMMdd";
+
+    // Get the color value for colorPrimary attribute
+    public static int getPrimaryColor(Context ctx) {
+        TypedValue tv = new TypedValue();
+        ctx.getTheme().resolveAttribute(R.attr.colorPrimary, tv,true);
+        return ctx.getResources().getColor(tv.resourceId);
+    }
+    // Change colors of the status bar and action bar of the ActionBarActivity from fromColor to toColor.
+    // If fromColor and toColor are different, do a delightful animation.
+    // If fromColor and toColor are the same, just set the color instantly.
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static void changeBarColor(final ActionBarActivity activity, int fromColor, int toColor) {
+        if (fromColor != toColor) {
+            ValueAnimator bgAnim = ValueAnimator.ofObject(new ArgbEvaluator(),
+                    fromColor,
+                    toColor);
+            bgAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    int animatedColor = (Integer) valueAnimator.getAnimatedValue();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        activity.getWindow().setStatusBarColor(getDarkerColor(animatedColor));
+                    }
+                    activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(animatedColor));
+                }
+            });
+            bgAnim.setStartDelay(150);
+            bgAnim.start();
+        } else {
+            // This is called when the color is already the color that we want (e.g. during screen rotation).
+            // So, don't do animation here.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.getWindow().setStatusBarColor(getDarkerColor(toColor));
+            }
+            activity.getSupportActionBar().setBackgroundDrawable(new ColorDrawable(toColor));
+        }
+    }
+    // Given color, return a slightly darker version of the color
+    public static int getDarkerColor(int color) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(color, hsv);
+        hsv[2] *= 0.9f;
+        return Color.HSVToColor(hsv);
+    }
 
     public static String getPreferredLocation(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);

@@ -27,9 +27,14 @@ import android.widget.ListView;
 
 import com.example.micyeung.sunshine.app.sync.SunshineSyncAdapter;
 
-public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback {
+public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback, DetailFragment.DetailCallback{
     private final String LOG_TAG = MainActivity.class.getSimpleName();
     private boolean mTwoPane;
+
+    // This is the current theme (i.e. status bar and action bar) color.
+    // Initialize to an invalid value
+    private int mThemeColor = DetailFragment.INVALID_COLOR;
+    private static final String THEME_COLOR_KEY = "main_activity_theme_color";
 
     @Override
     protected void onDestroy() {
@@ -62,8 +67,17 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(THEME_COLOR_KEY, mThemeColor);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            mThemeColor = savedInstanceState.getInt(THEME_COLOR_KEY);
+        }
         Log.i("MainActivity", "onCreate");
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -215,5 +229,21 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
                 .excludeTarget(android.R.id.navigationBarBackground, true)
                 .excludeTarget(android.R.id.statusBarBackground, true);
         return ts;
+    }
+
+    // This is only called in two-pane mode, as a callback from DetailFragment
+    @Override
+    public void doColorChange(int toColor) {
+        // Need this check because ValueAnimator methods only work on API 11 and above
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            if (mThemeColor == DetailFragment.INVALID_COLOR) {
+                mThemeColor = Utility.getPrimaryColor(this);
+            }
+            int fromColor = mThemeColor;
+            Utility.changeBarColor(this, fromColor, toColor);
+            // Set the theme color to be the new color
+            mThemeColor = toColor;
+        }
+
     }
 }

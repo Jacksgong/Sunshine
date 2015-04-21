@@ -6,6 +6,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -73,6 +75,15 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private static final String SET_REMINDER_KEY = "set_reminder";
     private boolean mReminderSet = false;
     private ImageButton mFab;
+
+    public static final int INVALID_COLOR = Integer.MAX_VALUE;
+
+    public interface DetailCallback {
+        /*
+       Callback to be implemented by containing activity
+        */
+        public void doColorChange(int toColor);
+    }
 
     public DetailFragment() {
         setHasOptionsMenu(true);
@@ -249,6 +260,25 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         if (data != null && data.moveToFirst()) {
             int weatherId = data.getInt(data.getColumnIndex(WeatherEntry.COLUMN_WEATHER_ID));
             mIconView.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId));
+
+            // Using the icon in mIconView, grab the best color, and use that to change the theme color
+            // of the containing activity (through callback).
+            Palette.generateAsync(
+                    ((BitmapDrawable) mIconView.getDrawable()).getBitmap(),
+                    new Palette.PaletteAsyncListener() {
+                        @Override
+                        public void onGenerated(Palette palette) {
+                            int toColor = INVALID_COLOR;
+                            for (Palette.Swatch swatch : palette.getSwatches()) {
+                                float lightness = swatch.getHsl()[2];
+                                if (lightness < 0.6) {
+                                    toColor = swatch.getRgb();
+                                    break;
+                                }
+                            }
+                            ((DetailCallback) getActivity()).doColorChange(toColor);
+                        }
+                    });
 
             // Read date from cursor and update views for day of week and date
             String date = data.getString(data.getColumnIndex(WeatherEntry.COLUMN_DATETEXT));
