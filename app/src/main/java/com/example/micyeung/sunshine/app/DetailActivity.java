@@ -1,10 +1,12 @@
 package com.example.micyeung.sunshine.app;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -36,6 +38,17 @@ public class DetailActivity extends ActionBarActivity {
                     .add(R.id.weather_detail_container, detailFragment)
                     .commit();
         }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setAllowEnterTransitionOverlap(false);
+            getWindow().setEnterTransition(new Explode()
+                    .excludeTarget(android.R.id.navigationBarBackground, true)
+                    .excludeTarget(android.R.id.statusBarBackground, true));
+            getWindow().setReturnTransition(new Explode()
+                    .excludeTarget(android.R.id.navigationBarBackground, true));
+            postponeEnterTransition();
+        }
+
     }
 
 
