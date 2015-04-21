@@ -5,6 +5,7 @@
     android:background="@drawable/today_touch_selector"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
+    android:paddingTop="@dimen/action_bar_height"
     android:orientation="horizontal">
     <!--android:background="@drawable/touch_selector"-->
     <!--LinearLayout
