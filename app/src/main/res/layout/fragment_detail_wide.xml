@@ -1,99 +1,122 @@
 <!-- Detailed layout for wide screens. For phone landscape and tablet portrait and landscape--><!-- Pointed to by values-land/refs.xml and values-sw600dp/refs.xml; demonstrates layout aliasing --><!-- Master layout. -->
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/fragment_margin">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!-- Header: Day, Date -->
+                <TextView
+                    android:id="@+id/detail_day_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/detail_day_text_size" />
+
+                <TextView
+                    android:id="@+id/detail_date_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/detail_date_text_size" />
+            </LinearLayout>
+            <!-- Main content: high, low, art, weather state -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/fragment_margin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/detail_high_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="@dimen/detail_high_text_size" />
+
+                <TextView
+                    android:id="@+id/detail_low_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="@dimen/detail_low_text_size" />
+                <!-- Humidity, wind, pressure -->
+                <TextView
+                    android:id="@+id/detail_humidity_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/textview_margin"
+                    android:textAppearance="?android:textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/detail_pressure_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/textview_margin"
+                    android:textAppearance="?android:textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/detail_wind_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/textview_margin"
+                    android:textAppearance="?android:textAppearanceLarge" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/detail_icon"
+                    android:transitionName="@string/transition_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/detail_forecast_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:transitionName="@string/transition_forecast_text"
+                    android:textAppearance="?android:textAppearanceLarge" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/fragment_margin">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true">
 
-        <LinearLayout
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <!-- Header: Day, Date -->
-            <TextView
-                android:id="@+id/detail_day_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed"
-                android:textColor="@color/black"
-                android:textSize="@dimen/detail_day_text_size" />
-
-            <TextView
-                android:id="@+id/detail_date_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed"
-                android:textColor="@color/black"
-                android:textSize="@dimen/detail_date_text_size" />
-        </LinearLayout>
-        <!-- Main content: high, low, art, weather state -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/fragment_margin"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/detail_high_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="sans-serif-light"
-                android:textSize="@dimen/detail_high_text_size" />
-
-            <TextView
-                android:id="@+id/detail_low_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="sans-serif-light"
-                android:textSize="@dimen/detail_low_text_size" />
-            <!-- Humidity, wind, pressure -->
-            <TextView
-                android:id="@+id/detail_humidity_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/textview_margin"
-                android:textAppearance="?android:textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/detail_pressure_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/textview_margin"
-                android:textAppearance="?android:textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/detail_wind_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/textview_margin"
-                android:textAppearance="?android:textAppearanceLarge" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/detail_icon"
-                android:transitionName="@string/transition_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/detail_forecast_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:transitionName="@string/transition_forecast_text"
-                android:textAppearance="?android:textAppearanceLarge" />
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+            android:id="@+id/fab"
+            android:layout_marginRight="@dimen/fab_right_layout_margin"
+            android:layout_marginBottom="@dimen/fab_bottom_layout_margin"
+            android:background="@drawable/fab"
+            android:src="@drawable/ic_event_set_white"
+            android:elevation="@dimen/layer_1"
+            android:stateListAnimator="@anim/fabraise" />
+    </FrameLayout>
+</RelativeLayout>
