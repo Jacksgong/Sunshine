@@ -17,3 +17,6 @@
 7 | [f1e04aa](https://github.com/Jacksgong/Sunshine/commit/f1e04aae2509a44137040eba389e6565bea63a0d) | 给FAB增加点击动画 | [https://docs.google.com/document/u/0/d/1RpPGPNEB-jzKTTzhgrBtSm_UdM8byu2-R6NGCLJ15wQ/pub#h.4i0w9nkcoaa5](https://docs.google.com/document/u/0/d/1RpPGPNEB-jzKTTzhgrBtSm_UdM8byu2-R6NGCLJ15wQ/pub#h.4i0w9nkcoaa5)
 8 | [068b909](https://github.com/Jacksgong/Sunshine/commit/068b90991edfb06eb70390d917ef5721424903a3) | 利用v7的Palette获取图片中的颜色元素，作用于Toolbar上 | [https://docs.google.com/document/u/0/d/1iGnjEr9e1bAY-v7eIGWVuJjN-M35oD-pSl25m28WUG8/pub#h.4i0w9nkcoaa5](https://docs.google.com/document/u/0/d/1iGnjEr9e1bAY-v7eIGWVuJjN-M35oD-pSl25m28WUG8/pub#h.4i0w9nkcoaa5)
 9 | [f334f49](https://github.com/Jacksgong/Sunshine/commit/f334f4924c28f2954783e88e28bf146fcd2a6fb1) | 通过动态隐藏Toolbar来实现沉浸模式 | [https://docs.google.com/document/u/0/d/1lmYFkaqKFrWJpJ2wvHnNqJewI8ZnUVfGxJheNLNHZPg/pub#h.vxotbasw7wca](https://docs.google.com/document/u/0/d/1lmYFkaqKFrWJpJ2wvHnNqJewI8ZnUVfGxJheNLNHZPg/pub#h.vxotbasw7wca)
+
+----
+MORE NOTE:[Google 2015 Material Design Summit](http://blog.dreamtobe.cn/2239.html) 
