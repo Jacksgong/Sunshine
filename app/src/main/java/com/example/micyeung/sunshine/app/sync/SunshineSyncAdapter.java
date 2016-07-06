@@ -189,11 +189,13 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
         final String FORMAT_PARAM = "mode";
         final String UNIT_PARAM = "units";
         final String DAYS_PARAM = "cnt";
+        final String APP_ID = "appid";
         Uri uri = Uri.parse(BASE_URI).buildUpon()
                 .appendQueryParameter(QUERY_PARAM, locationQuery)
                 .appendQueryParameter(FORMAT_PARAM, format)
                 .appendQueryParameter(UNIT_PARAM, units)
                 .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
+                .appendQueryParameter(APP_ID, "6e3c15d736f1e00b0c9baaa2f089147a")
                 .build();
 
         try {
@@ -230,6 +232,11 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
             }
         }
+        if (forecastJsonStr == null) {
+            Log.w(LOG_TAG, "Can't get weather, maybe the count of request over limit.");
+            return;
+        }
+        
         WeatherDataParser wdp = new WeatherDataParser();
         try {
             wdp.getWeatherDataFromJson(forecastJsonStr, numDays, locationQuery, getContext());
